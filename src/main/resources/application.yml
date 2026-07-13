@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: toy-book-search
+
+opensearch:
+  host: ${OPENSEARCH_HOST:localhost}
+  port: ${OPENSEARCH_PORT:9200}
+  username: ${OPENSEARCH_USERNAME:admin}
+  password: ${OPENSEARCH_PASSWORD:admin}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"

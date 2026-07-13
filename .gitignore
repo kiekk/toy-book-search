@@ -1,0 +1,54 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### VS Code ###
+.vscode/
+
+### macOS ###
+.DS_Store
+
+### Next.js / Node (web/) ###
+web/node_modules/
+web/.next/
+web/out/
+web/build/
+web/.env*.local
+web/.pnp
+web/.pnp.js
+next-env.d.ts
+
+### Secrets / Local overrides ###
+application-local.yml
+application-local.yaml
+application-local.properties
+*.pem
+*.key
+
+### OpenSearch data volume ###
+data/
+opensearch-data/
