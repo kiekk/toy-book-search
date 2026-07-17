@@ -1,0 +1,35 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "refresh_interval": "30s"
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "id":              { "type": "keyword" },
+      "title":           { "type": "text",
+                           "fields": { "keyword": { "type": "keyword", "ignore_above": 512 } } },
+      "subtitle":        { "type": "text" },
+      "authors":         { "type": "text",
+                           "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
+      "translators":     { "type": "text",
+                           "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
+      "publisher":       { "type": "text",
+                           "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
+      "published_at":    { "type": "date",
+                           "format": "yyyy-MM-dd||strict_date_optional_time||epoch_millis" },
+      "isbn13":          { "type": "keyword" },
+      "isbn10":          { "type": "keyword" },
+      "categories":      { "type": "keyword" },
+      "description":     { "type": "text" },
+      "page_count":      { "type": "integer" },
+      "language":        { "type": "keyword" },
+      "cover_url":       { "type": "keyword", "index": false, "doc_values": false },
+      "price":           { "type": "integer" },
+      "source":          { "type": "keyword" }
+    }
+  }
+}
