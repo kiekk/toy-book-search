@@ -36,8 +36,8 @@ QUERY_TYPES: list[str] = [
 
 
 class AladinClient:
-    LIST_URL = "http://www.aladin.co.kr/ttb/api/ItemList.aspx"
-    SEARCH_URL = "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx"
+    LIST_URL = "https://www.aladin.co.kr/ttb/api/ItemList.aspx"
+    SEARCH_URL = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx"
     PAGE_SIZE = 50
     MAX_PAGE = 20
 
@@ -45,7 +45,7 @@ class AladinClient:
         if not ttb_key:
             raise ValueError("Aladin TTB key is required")
         self.ttb_key = ttb_key
-        self.client = httpx.Client(timeout=timeout)
+        self.client = httpx.Client(timeout=timeout, follow_redirects=True)
 
     def list_by_category(
         self,
