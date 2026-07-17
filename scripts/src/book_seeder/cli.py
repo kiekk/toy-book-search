@@ -51,5 +51,47 @@ def generate(
     typer.secho(f"[OK] {written:,} 건 생성 → {output}", fg=typer.colors.GREEN)
 
 
+@app.command()
+def index(
+    input_file: Annotated[
+        Path,
+        typer.Option("--input", "-i", help="색인할 NDJSON 파일"),
+    ],
+    index_name: Annotated[
+        str,
+        typer.Option("--index", help="OpenSearch 인덱스 이름"),
+    ] = "books",
+    host: Annotated[
+        str,
+        typer.Option("--host", help="OpenSearch 호스트"),
+    ] = "localhost",
+    port: Annotated[
+        int,
+        typer.Option("--port", help="OpenSearch 포트"),
+    ] = 9200,
+    chunk_size: Annotated[
+        int,
+        typer.Option("--chunk-size", help="bulk 청크 크기"),
+    ] = 1000,
+) -> None:
+    """NDJSON 파일을 OpenSearch에 bulk 색인."""
+    from .indexer import bulk_index
+
+    success, failed, elapsed = bulk_index(
+        ndjson=input_file,
+        index_name=index_name,
+        host=host,
+        port=port,
+        chunk_size=chunk_size,
+    )
+    color = typer.colors.GREEN if failed == 0 else typer.colors.YELLOW
+    typer.secho(
+        f"[OK] {success:,} 건 성공 · {failed:,} 건 실패 · {elapsed:.1f}s",
+        fg=color,
+    )
+    if elapsed > 0:
+        typer.echo(f"     평균 처리량: {success / elapsed:,.0f} doc/sec")
+
+
 if __name__ == "__main__":
     app()
